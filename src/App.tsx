@@ -1,18 +1,18 @@
-import react from 'react';
-import axios from 'axios';
-// import 'app.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { AutosListados } from './componentes/Autos/AutosListados';
+import { PersonasListadas } from './componentes/Personas/PersonasListadas';
+import { Home } from './componentes/Home';
 
-const serverUrl = 'http://localhost:3000';
-
-const App: react.FC = () => {
-    const [message, setMessage] = react.useState<string | undefined>();
-    react.useEffect(() => {
-        (async () => {
-            const response = await axios.get<string>(serverUrl);
-            setMessage(response.data);
-        })();
-    }, []);
-    return <>{message === undefined ? <h2>loading...</h2> : <h2>{message}</h2>};</>;
+const App: React.FC = () => {
+    return (
+        <Router>
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/autos" element={<AutosListados />} />
+                <Route path="/personas" element={<PersonasListadas />} />
+            </Routes>
+        </Router>
+    );
 };
 
 export default App;
