@@ -1,20 +1,24 @@
 import { useState, useEffect } from 'react';
 import { Persona } from '../../modelo/Persona';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import apiClient from '../../api/apiService';
+import { BotonEliminar } from '../Botones/BotonEliminar';
+import { BotonEditar } from '../Botones/BotonEditar';
+import { BotonVer } from '../Botones/BotonVerInfo';
 
 export const PersonasListadas = () => {
-    const OBTENERVEHICULOS = '/personas';
+    const OBTENERPERSONAS = '/personas';
     const [personas, setPersonas] = useState<Persona[]>([]);
-    const [error, setError] = useState<string | null>(null);
-    const server = 'http://localhost:3000';
+    const [, setError] = useState<string | null>(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const obtenerPersonas = async () => {
             try {
-                const response = await axios.get<Persona[]>(server + OBTENERVEHICULOS);
+                const response = await apiClient.get<Persona[]>(OBTENERPERSONAS);
                 setPersonas(response.data);
             } catch (err: unknown) {
-                setError('Error al obtener los vehículos' + err);
+                setError('Error al obtener las personas: ' + (err as Error).message);
             }
         };
         obtenerPersonas();
@@ -22,15 +26,37 @@ export const PersonasListadas = () => {
 
     return (
         <div>
-            <h2>Lista de Personas</h2>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            <ul>
-                {personas.map((persona, index) => (
-                    <li key={index}>
-                        {persona.nombre} - {persona.apellido} - {persona.dni}
-                    </li>
-                ))}
-            </ul>
+            <h2>Personas</h2>
+            <button
+                style={{ backgroundColor: 'green', color: 'white', marginBottom: '10px' }}
+                onClick={() => navigate('/persona')}
+            >
+                Agregar nueva
+            </button>
+            <table border={1} cellPadding={8} cellSpacing={0}>
+                <thead>
+                    <tr>
+                        <th>DNI</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {personas.map((persona) => (
+                        <tr key={persona.id}>
+                            <td>{persona.dni}</td>
+                            <td>{persona.nombre}</td>
+                            <td>{persona.apellido}</td>
+                            <td>
+                                <BotonVer entidad={'persona'} id={persona.id} />
+                                <BotonEditar entidad={'persona'} id={persona.id} />
+                                <BotonEliminar entidad={'persona'} id={persona.id} />
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
     );
 };
