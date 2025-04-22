@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
 import { Persona } from '../../modelo/Persona';
-import { useNavigate } from 'react-router-dom';
 import apiClient from '../../api/apiService';
 import { BotonEliminar } from '../Botones/BotonEliminar';
 import { BotonEditar } from '../Botones/BotonEditar';
 import { BotonVer } from '../Botones/BotonVerInfo';
+import { BotonVolver } from '../Botones/BotonVolver';
+import { BotonNuevaPersona } from '../Botones/BotonNuevaPersona';
 
 export const PersonasListadas = () => {
     const OBTENERPERSONAS = '/personas';
     const [personas, setPersonas] = useState<Persona[]>([]);
     const [, setError] = useState<string | null>(null);
-    const navigate = useNavigate();
 
     useEffect(() => {
         const obtenerPersonas = async () => {
@@ -27,12 +27,7 @@ export const PersonasListadas = () => {
     return (
         <div>
             <h2>Personas</h2>
-            <button
-                style={{ backgroundColor: 'green', color: 'white', marginBottom: '10px' }}
-                onClick={() => navigate('/persona')}
-            >
-                Agregar nueva
-            </button>
+            <BotonNuevaPersona entidad={'persona'} />
             <table border={1} cellPadding={8} cellSpacing={0}>
                 <thead>
                     <tr>
@@ -57,6 +52,8 @@ export const PersonasListadas = () => {
                     ))}
                 </tbody>
             </table>
+            <br />
+            <BotonVolver entidad={''} />
         </div>
     );
 };

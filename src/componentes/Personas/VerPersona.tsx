@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import apiClient from '../../api/apiService';
 import { BotonVolver } from '../Botones/BotonVolver';
+import { BotonNuevoAuto } from '../Botones/BotonNuevoAuto';
+import { AutosListados } from '../Autos/AutosListados';
+import { BotonEditar } from '../Botones/BotonEditar';
+import { BotonEliminar } from '../Botones/BotonEliminar';
 
 export const VerPersona = () => {
     const { id } = useParams<{ id: string }>();
@@ -48,7 +52,16 @@ export const VerPersona = () => {
                 <strong>Es donante:</strong> {persona.esDonante ? 'Si' : 'No'}
             </p>
 
+            <BotonEditar entidad={'persona'} id={persona.id} />
+
+            <BotonEliminar entidad={'persona'} id={persona.id} />
+
             <BotonVolver entidad={'personas'} />
+            <br />
+            <br />
+            <BotonNuevoAuto entidad={'auto'} />
+            <br />
+            <AutosListados />
         </div>
     );
 };

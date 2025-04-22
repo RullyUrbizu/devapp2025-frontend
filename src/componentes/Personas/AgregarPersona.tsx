@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import apiClient from '../../api/apiService';
 import { Genero } from '../../modelo/Genero';
+import { BotonVolver } from '../Botones/BotonVolver';
 
 export const CrearPersona = () => {
     const navigate = useNavigate();
@@ -89,6 +90,8 @@ export const CrearPersona = () => {
                 </label>
                 <br />
                 <button type="submit">Guardar</button>
+
+                <BotonVolver entidad={'personas'} />
             </form>
         </div>
     );

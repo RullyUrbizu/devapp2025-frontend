@@ -3,6 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import apiClient from '../../api/apiService';
 import { Genero } from '../../modelo/Genero';
 import { Persona } from '../../modelo/Persona';
+import { BotonVolver } from '../Botones/BotonVolver';
+import { AutosListados } from '../Autos/AutosListados';
 
 export const EditarPersona = () => {
     const { id } = useParams();
@@ -58,8 +60,7 @@ export const EditarPersona = () => {
         try {
             await apiClient.put(`/persona/${id}`, {
                 ...form,
-                fechaNacimiento: new Date(form.fechaNacimiento).toISOString(),
-                autos: []
+                fechaNacimiento: new Date(form.fechaNacimiento).toISOString()
             });
             navigate('/personas');
         } catch (error) {
@@ -111,6 +112,10 @@ export const EditarPersona = () => {
                 </label>
                 <br />
                 <button type="submit">Guardar Cambios</button>
+
+                <BotonVolver entidad={'personas'} />
+
+                <AutosListados />
             </form>
         </div>
     );
