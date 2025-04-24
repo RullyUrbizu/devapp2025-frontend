@@ -16,6 +16,7 @@ export const EliminarPersona = () => {
             await apiClient.delete(ELIMINAR_PERSONA);
 
             navigate('/personas');
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
             if (!err?.response) {
                 setErrMsg('El servicio no responde');

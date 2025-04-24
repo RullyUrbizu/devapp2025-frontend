@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { AutosListados } from './componentes/Autos/AutosListados';
-import { PersonasListadas } from './componentes/Personas/PersonasListadas';
+import { ListarAutos } from './componentes/Autos/ListarAutos';
+import { PersonasListadas } from './componentes/Personas/ListarPersonas';
 import { CrearPersona } from './componentes/Personas/AgregarPersona';
 import { Home } from './componentes/Home';
 import { EliminarPersona } from './componentes/Personas/EliminarPersona';
@@ -16,7 +16,7 @@ const App: React.FC = () => {
         <Router>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/autos" element={<AutosListados />} />
+                <Route path="/autos" element={<ListarAutos />} />
                 <Route path="/personas" element={<PersonasListadas />} />
                 <Route path="/persona" element={<CrearPersona />} />
                 <Route path="/persona/eliminar/:id" element={<EliminarPersona />} />

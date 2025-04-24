@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import apiClient from '../../api/apiService';
 
+import '../../css/Formulario.css';
+
 export const CrearAuto = () => {
     const navigate = useNavigate();
 
@@ -35,7 +37,7 @@ export const CrearAuto = () => {
     };
 
     return (
-        <div>
+        <div className="form-container">
             <h2>Crear Auto</h2>
             <form onSubmit={handleSubmit}>
                 <input
@@ -46,7 +48,6 @@ export const CrearAuto = () => {
                     onChange={handleChange}
                     required
                 />
-                <br />
                 <input
                     type="text"
                     name="modelo"
@@ -55,7 +56,6 @@ export const CrearAuto = () => {
                     onChange={handleChange}
                     required
                 />
-                <br />
                 <input
                     type="number"
                     name="anio"
@@ -64,7 +64,6 @@ export const CrearAuto = () => {
                     onChange={handleChange}
                     required
                 />
-                <br />
                 <input
                     type="text"
                     name="patente"
@@ -73,7 +72,6 @@ export const CrearAuto = () => {
                     onChange={handleChange}
                     required
                 />
-                <br />
                 <input
                     type="text"
                     name="color"
@@ -82,7 +80,6 @@ export const CrearAuto = () => {
                     onChange={handleChange}
                     required
                 />
-                <br />
                 <input
                     type="text"
                     name="numeroChasis"
@@ -91,7 +88,6 @@ export const CrearAuto = () => {
                     onChange={handleChange}
                     required
                 />
-                <br />
                 <input
                     type="text"
                     name="numeroMotor"
@@ -100,7 +96,6 @@ export const CrearAuto = () => {
                     onChange={handleChange}
                     required
                 />
-                <br />
                 <input
                     type="text"
                     name="duenio"

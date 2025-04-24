@@ -4,6 +4,8 @@ import apiClient from '../../api/apiService';
 import { Genero } from '../../modelo/Genero';
 import { BotonVolver } from '../Botones/BotonVolver';
 
+import '../../css/Formulario.css';
+
 export const CrearPersona = () => {
     const navigate = useNavigate();
 
@@ -47,7 +49,7 @@ export const CrearPersona = () => {
     };
 
     return (
-        <div>
+        <div className="form-container">
             <h2>Crear Persona</h2>
             <form onSubmit={handleSubmit}>
                 <input
@@ -58,7 +60,6 @@ export const CrearPersona = () => {
                     onChange={handleChange}
                     required
                 />
-                <br />
                 <input
                     type="text"
                     name="apellido"
@@ -67,9 +68,7 @@ export const CrearPersona = () => {
                     onChange={handleChange}
                     required
                 />
-                <br />
                 <input type="text" name="dni" placeholder="DNI" value={form.dni} onChange={handleChange} required />
-                <br />
                 <input
                     type="date"
                     name="fechaNacimiento"
@@ -77,18 +76,15 @@ export const CrearPersona = () => {
                     onChange={handleChange}
                     required
                 />
-                <br />
                 <select name="genero" value={form.genero} onChange={handleChange} required>
                     <option value="">Seleccione genero</option>
                     <option value={Genero.Masculino}>Masculino</option>
                     <option value={Genero.Femenino}>Femenino</option>
                     <option value={Genero.NoBinario}>Otro</option>
                 </select>
-                <br />
                 <label>
                     <input type="checkbox" name="esDonante" checked={form.esDonante} onChange={handleChange} /> Donante
                 </label>
-                <br />
                 <button type="submit">Guardar</button>
 
                 <BotonVolver entidad={'personas'} />

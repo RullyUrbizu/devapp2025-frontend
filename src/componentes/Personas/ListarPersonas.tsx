@@ -6,6 +6,7 @@ import { BotonEditar } from '../Botones/BotonEditar';
 import { BotonVer } from '../Botones/BotonVerInfo';
 import { BotonVolver } from '../Botones/BotonVolver';
 import { BotonNuevaPersona } from '../Botones/BotonNuevaPersona';
+import '../../css/Listados.css';
 
 export const PersonasListadas = () => {
     const OBTENERPERSONAS = '/personas';
@@ -25,10 +26,10 @@ export const PersonasListadas = () => {
     }, []);
 
     return (
-        <div>
+        <div className="personas-container">
             <h2>Personas</h2>
             <BotonNuevaPersona entidad={'persona'} />
-            <table border={1} cellPadding={8} cellSpacing={0}>
+            <table className="personas-table">
                 <thead>
                     <tr>
                         <th>DNI</th>
@@ -43,7 +44,7 @@ export const PersonasListadas = () => {
                             <td>{persona.dni}</td>
                             <td>{persona.nombre}</td>
                             <td>{persona.apellido}</td>
-                            <td>
+                            <td className="acciones">
                                 <BotonVer entidad={'persona'} id={persona.id} />
                                 <BotonEditar entidad={'persona'} id={persona.id} />
                                 <BotonEliminar entidad={'persona'} id={persona.id} />

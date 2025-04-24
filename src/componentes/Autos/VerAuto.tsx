@@ -3,14 +3,18 @@ import { useParams } from 'react-router-dom';
 import apiClient from '../../api/apiService';
 import { BotonVolver } from '../Botones/BotonVolver';
 import { Auto } from '../../modelo/Auto';
-// import { BotonVer } from '../Botones/BotonVerInfo';
-// import { Persona } from '../../modelo/Persona';
+import { BotonVer } from '../Botones/BotonVerInfo';
+import { Persona } from '../../modelo/Persona';
+import { BotonEditar } from '../Botones/BotonEditar';
+import { BotonEliminar } from '../Botones/BotonEliminar';
+
+import '../../css/Ver.css';
 
 export const VerAuto = () => {
     const { id } = useParams();
     const [auto, setAuto] = useState<Auto | null>(null);
     const [error, setError] = useState<string | null>(null);
-    // const [persona, setPersona] = useState<Persona>();
+    const [persona, setPersona] = useState<Persona>();
 
     useEffect(() => {
         const fetchAuto = async () => {
@@ -26,24 +30,24 @@ export const VerAuto = () => {
         fetchAuto();
     }, [id]);
 
-    // useEffect(() => {
-    //     if (!auto?.duenio) return;
-    //     const fetchPersona = async () => {
-    //         try {
-    //             const laPersona = await apiClient.get<Persona>(`/persona/${auto.duenio}`);
-    //             setPersona(laPersona.data);
-    //         } catch (err) {
-    //             setError('Error al obtener el auto' + err);
-    //         }
-    //     };
-    //     fetchPersona();
-    // }, [auto?.duenio]);
+    useEffect(() => {
+        if (!auto?.duenio) return;
+        const fetchPersona = async () => {
+            try {
+                const laPersona = await apiClient.get<Persona>(`/persona/${auto.duenio}`);
+                setPersona(laPersona.data);
+            } catch (err) {
+                setError('Error al obtener el auto' + err);
+            }
+        };
+        fetchPersona();
+    }, [auto?.duenio]);
 
     if (error) return <p>{error}</p>;
     if (!auto) return <p>No se encontro el auto.</p>;
 
     return (
-        <div>
+        <div className="detalle-container">
             <h2>Detalles del auto</h2>
             <p>
                 <strong>Marca:</strong> {auto.marca}
@@ -66,13 +70,16 @@ export const VerAuto = () => {
             <p>
                 <strong>Numero Motor:</strong> {auto.numeroMotor}
             </p>
-            <p>
-                <strong>Duenio:</strong> {auto.duenio}
-            </p>
 
-            {/* {persona && <BotonVer entidad={'persona'} id={persona.id} />} */}
+            <div className="botones-container">
+                {persona && <BotonVer entidad={'persona'} id={persona.id} />}
 
-            <BotonVolver entidad={'autos'} />
+                <BotonEditar entidad={'auto'} id={auto.id} />
+
+                <BotonEliminar entidad={'auto'} id={auto.id} />
+
+                <BotonVolver entidad={'autos'} />
+            </div>
         </div>
     );
 };

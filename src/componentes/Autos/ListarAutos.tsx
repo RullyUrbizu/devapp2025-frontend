@@ -6,7 +6,9 @@ import { BotonEditar } from '../Botones/BotonEditar';
 import { BotonEliminar } from '../Botones/BotonEliminar';
 import { BotonVolver } from '../Botones/BotonVolver';
 
-export const AutosListados = () => {
+import '../../css/Listados.css';
+
+export const ListarAutos = () => {
     const OBTENERVEHICULOS = '/autos';
     const [autos, setAutos] = useState<Auto[]>([]);
     const [, setError] = useState<string | null>(null);
@@ -24,9 +26,9 @@ export const AutosListados = () => {
     }, []);
 
     return (
-        <div>
+        <div className="autos-container">
             <h2>Autos</h2>
-            <table border={1} cellPadding={8} cellSpacing={0}>
+            <table className="autos-table">
                 <thead>
                     <tr>
                         <th>Patente</th>
@@ -37,11 +39,11 @@ export const AutosListados = () => {
                 </thead>
                 <tbody>
                     {autos.map((auto) => (
-                        <tr key={auto.patente}>
+                        <tr key={auto.id}>
                             <td>{auto.patente}</td>
                             <td>{auto.marca}</td>
                             <td>{auto.modelo}</td>
-                            <td>
+                            <td className="acciones">
                                 <BotonVer entidad={'auto'} id={auto.id} />
                                 <BotonEditar entidad={'auto'} id={auto.id} />
                                 <BotonEliminar entidad={'auto'} id={auto.id} />

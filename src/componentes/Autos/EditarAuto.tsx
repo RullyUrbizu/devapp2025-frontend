@@ -3,6 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import apiClient from '../../api/apiService';
 import { Auto } from '../../modelo/Auto';
 
+import '../../css/Formulario.css';
+
 export const EditarAuto = () => {
     const { id } = useParams();
     const navigate = useNavigate();
@@ -61,13 +63,11 @@ export const EditarAuto = () => {
     };
 
     return (
-        <div>
+        <div className="form-container">
             <h2>Editar Auto</h2>
             <form onSubmit={handleSubmit}>
                 <input name="marca" placeholder="Marca" value={form.marca} onChange={handleChange} required />
-                <br />
                 <input name="modelo" placeholder="Modelo" value={form.modelo} onChange={handleChange} required />
-                <br />
                 <input
                     type="number"
                     name="anio"
@@ -76,11 +76,8 @@ export const EditarAuto = () => {
                     onChange={handleChange}
                     required
                 />
-                <br />
                 <input name="patente" placeholder="Patente" value={form.patente} onChange={handleChange} required />
-                <br />
                 <input name="color" placeholder="Color" value={form.color} onChange={handleChange} required />
-                <br />
                 <input
                     name="numeroChasis"
                     placeholder="Numero Chasis"
@@ -88,7 +85,6 @@ export const EditarAuto = () => {
                     onChange={handleChange}
                     required
                 />
-                <br />
                 <input
                     name="numeroMotor"
                     placeholder="Numero Motor"
@@ -96,8 +92,6 @@ export const EditarAuto = () => {
                     onChange={handleChange}
                     required
                 />
-                <br />
-                <input name="duenio" placeholder="ID del Dueño" value={form.duenio} onChange={handleChange} required />
                 <br />
                 <button type="submit">Guardar Cambios</button>
             </form>

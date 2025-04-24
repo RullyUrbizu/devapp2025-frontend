@@ -4,7 +4,9 @@ import apiClient from '../../api/apiService';
 import { Genero } from '../../modelo/Genero';
 import { Persona } from '../../modelo/Persona';
 import { BotonVolver } from '../Botones/BotonVolver';
-import { AutosListados } from '../Autos/AutosListados';
+import { ListarAutos } from '../Autos/ListarAutos';
+
+import '../../css/Formulario.css';
 
 export const EditarPersona = () => {
     const { id } = useParams();
@@ -69,7 +71,7 @@ export const EditarPersona = () => {
     };
 
     return (
-        <div>
+        <div className="form-container">
             <h2>Editar Persona</h2>
             <form onSubmit={handleSubmit}>
                 <input
@@ -80,7 +82,6 @@ export const EditarPersona = () => {
                     onChange={handleChange}
                     required
                 />
-                <br />
                 <input
                     type="text"
                     name="apellido"
@@ -89,9 +90,7 @@ export const EditarPersona = () => {
                     onChange={handleChange}
                     required
                 />
-                <br />
                 <input type="text" name="dni" value={form.dni} onChange={handleChange} readOnly />
-                <br />
                 <input
                     type="date"
                     name="fechaNacimiento"
@@ -99,14 +98,12 @@ export const EditarPersona = () => {
                     onChange={handleChange}
                     required
                 />
-                <br />
                 <select name="genero" value={form.genero} onChange={handleChange} required>
                     <option value="">Seleccione género</option>
                     <option value={Genero.Masculino}>Masculino</option>
                     <option value={Genero.Femenino}>Femenino</option>
                     <option value={Genero.NoBinario}>No Binario</option>
                 </select>
-                <br />
                 <label>
                     <input type="checkbox" name="esDonante" checked={form.esDonante} onChange={handleChange} /> Donante
                 </label>
@@ -115,7 +112,7 @@ export const EditarPersona = () => {
 
                 <BotonVolver entidad={'personas'} />
 
-                <AutosListados />
+                <ListarAutos />
             </form>
         </div>
     );

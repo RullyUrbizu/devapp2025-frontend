@@ -3,23 +3,24 @@ import { useParams } from 'react-router-dom';
 import apiClient from '../../api/apiService';
 import { BotonVolver } from '../Botones/BotonVolver';
 import { BotonNuevoAuto } from '../Botones/BotonNuevoAuto';
-import { AutosListados } from '../Autos/AutosListados';
+import { ListarAutos } from '../Autos/ListarAutos';
 import { BotonEditar } from '../Botones/BotonEditar';
 import { BotonEliminar } from '../Botones/BotonEliminar';
+import { Persona } from '../../modelo/Persona';
+
+import '../../css/Ver.css';
 
 export const VerPersona = () => {
     const { id } = useParams<{ id: string }>();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const [persona, setPersona] = useState<any>(null);
+    const [persona, setPersona] = useState<Persona | null>(null);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const fetchPersona = async () => {
             try {
-                const res = await apiClient.get(`/persona/${id}`);
+                const res = await apiClient.get<Persona>(`/persona/${id}`);
                 setPersona(res.data);
-                // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            } catch (err) {
+            } catch {
                 setError('Error al obtener la persona');
             }
         };
@@ -31,7 +32,7 @@ export const VerPersona = () => {
     if (!persona) return <p>No se encontro la persona.</p>;
 
     return (
-        <div>
+        <div className="detalle-container">
             <h2>Detalles de la Persona</h2>
             <p>
                 <strong>Nombre:</strong> {persona.nombre}
@@ -52,16 +53,17 @@ export const VerPersona = () => {
                 <strong>Es donante:</strong> {persona.esDonante ? 'Si' : 'No'}
             </p>
 
-            <BotonEditar entidad={'persona'} id={persona.id} />
+            <div className="botones-container">
+                <BotonEditar entidad={'persona'} id={persona.id} />
 
-            <BotonEliminar entidad={'persona'} id={persona.id} />
+                <BotonEliminar entidad={'persona'} id={persona.id} />
+
+                <BotonNuevoAuto entidad={'auto'} />
+            </div>
 
             <BotonVolver entidad={'personas'} />
-            <br />
-            <br />
-            <BotonNuevoAuto entidad={'auto'} />
-            <br />
-            <AutosListados />
+
+            <ListarAutos />
         </div>
     );
 };
