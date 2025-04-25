@@ -5,25 +5,28 @@ import { BotonVer } from '../Botones/BotonVerInfo';
 import { BotonEditar } from '../Botones/BotonEditar';
 import { BotonEliminar } from '../Botones/BotonEliminar';
 import { BotonVolver } from '../Botones/BotonVolver';
-
 import '../../css/Listados.css';
 
-export const ListarAutos = () => {
-    const OBTENERVEHICULOS = '/autos';
+interface duenio {
+    unDuenio: string;
+}
+
+export const ListarAutos = ({ unDuenio }: duenio) => {
     const [autos, setAutos] = useState<Auto[]>([]);
     const [, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const obtenerVehiculos = async () => {
             try {
-                const response = await apiClient.get<Auto[]>(OBTENERVEHICULOS);
+                const url = unDuenio ? `/autos?id=${unDuenio}` : '/autos';
+                const response = await apiClient.get<Auto[]>(url);
                 setAutos(response.data);
             } catch (err: unknown) {
-                setError('Error al obtener los vehículos' + err);
+                setError('Error al obtener los vehículos: ' + err);
             }
         };
         obtenerVehiculos();
-    }, []);
+    }, [unDuenio]);
 
     return (
         <div className="autos-container">

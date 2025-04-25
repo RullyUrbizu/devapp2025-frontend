@@ -52,7 +52,6 @@ export const VerPersona = () => {
             <p>
                 <strong>Es donante:</strong> {persona.esDonante ? 'Si' : 'No'}
             </p>
-
             <div className="botones-container">
                 <BotonEditar entidad={'persona'} id={persona.id} />
 
@@ -60,10 +59,8 @@ export const VerPersona = () => {
 
                 <BotonNuevoAuto entidad={'auto'} />
             </div>
-
             <BotonVolver entidad={'personas'} />
-
-            <ListarAutos />
+            <ListarAutos unDuenio={`${persona.id}`} />
         </div>
     );
 };
