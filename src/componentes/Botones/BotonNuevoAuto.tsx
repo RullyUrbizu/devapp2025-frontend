@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import { BotonPropsSimple } from './BotonProps';
+import { BotonProps } from './BotonProps';
 
-export const BotonNuevoAuto = ({ entidad }: BotonPropsSimple) => {
+export const BotonNuevoAuto = ({ entidad, id }: BotonProps) => {
     return (
         <>
-            <Link to={`/${entidad}`}>
+            <Link to={`/${entidad}/${id}`}>
                 <button style={{ backgroundColor: 'green', color: 'white', marginBottom: '10px' }}>
                     Agregar nuevo auto
                 </button>

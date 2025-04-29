@@ -57,7 +57,7 @@ export const VerPersona = () => {
 
                 <BotonEliminar entidad={'persona'} id={persona.id} />
 
-                <BotonNuevoAuto entidad={'auto'} />
+                <BotonNuevoAuto entidad={'auto'} id={persona.id} />
             </div>
             <BotonVolver entidad={'personas'} />
             <ListarAutos unDuenio={`${persona.id}`} />

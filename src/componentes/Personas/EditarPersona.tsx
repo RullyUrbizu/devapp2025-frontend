@@ -112,7 +112,7 @@ export const EditarPersona = () => {
 
                 <BotonVolver entidad={'personas'} />
 
-                <ListarAutos />
+                <ListarAutos unDuenio={`${id}`} />
             </form>
         </div>
     );

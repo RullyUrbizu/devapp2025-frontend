@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import apiClient from '../../api/apiService';
 
 import '../../css/Formulario.css';
+import { BotonCancelar } from '../Botones/BotonCancelar';
 
 export const CrearAuto = () => {
+    const { id } = useParams();
     const navigate = useNavigate();
 
     const [form, setForm] = useState({
@@ -15,7 +17,7 @@ export const CrearAuto = () => {
         color: '',
         numeroChasis: '',
         numeroMotor: '',
-        duenio: ''
+        duenio: id
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -96,16 +98,9 @@ export const CrearAuto = () => {
                     onChange={handleChange}
                     required
                 />
-                <input
-                    type="text"
-                    name="duenio"
-                    placeholder="DNI del Dueño"
-                    value={form.duenio}
-                    onChange={handleChange}
-                    required
-                />
                 <br />
                 <button type="submit">Guardar Auto</button>
+                <BotonCancelar entidad="personas" />
             </form>
         </div>
     );

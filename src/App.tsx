@@ -16,14 +16,14 @@ const App: React.FC = () => {
         <Router>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/autos" element={<ListarAutos />} />
+                <Route path="/autos" element={<ListarAutos unDuenio="" />} />
                 <Route path="/personas" element={<PersonasListadas />} />
                 <Route path="/persona" element={<CrearPersona />} />
                 <Route path="/persona/eliminar/:id" element={<EliminarPersona />} />
                 <Route path="/persona/editar/:id" element={<EditarPersona />} />
                 <Route path="/persona/ver/:id" element={<VerPersona />} />
 
-                <Route path="/auto" element={<CrearAuto />} />
+                <Route path="/auto/:id" element={<CrearAuto />} />
                 <Route path="/auto/editar/:id" element={<EditarAuto />} />
                 <Route path="/auto/ver/:id" element={<VerAuto />} />
                 <Route path="/auto/eliminar/:id" element={<EliminarAuto />} />
