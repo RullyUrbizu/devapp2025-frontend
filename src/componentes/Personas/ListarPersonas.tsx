@@ -6,55 +6,45 @@ import { BotonEditar } from '../Botones/BotonEditar';
 import { BotonVer } from '../Botones/BotonVerInfo';
 import { BotonVolver } from '../Botones/BotonVolver';
 import { BotonNuevaPersona } from '../Botones/BotonNuevaPersona';
-import '../../css/Listados.css';
+import { ListadoGenerico } from '../ListadoGenerico.tsx';
 
 export const PersonasListadas = () => {
-    const OBTENERPERSONAS = '/personas';
     const [personas, setPersonas] = useState<Persona[]>([]);
     const [, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const obtenerPersonas = async () => {
             try {
-                const response = await apiClient.get<Persona[]>(OBTENERPERSONAS);
+                const response = await apiClient.get<Persona[]>('/personas');
                 setPersonas(response.data);
-            } catch (err: unknown) {
+            } catch (err) {
                 setError('Error al obtener las personas: ' + (err as Error).message);
             }
         };
         obtenerPersonas();
     }, []);
 
+    const Acciones = (persona: Persona) => (
+        <>
+            <BotonVer entidad="persona" id={persona.id} />
+            <BotonEditar entidad="persona" id={persona.id} />
+            <BotonEliminar entidad="persona" id={persona.id} />
+        </>
+    );
+
     return (
-        <div className="personas-container">
-            <h2>Personas</h2>
-            <BotonNuevaPersona entidad={'persona'} />
-            <table className="personas-table">
-                <thead>
-                    <tr>
-                        <th>DNI</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {personas.map((persona) => (
-                        <tr key={persona.id}>
-                            <td>{persona.dni}</td>
-                            <td>{persona.nombre}</td>
-                            <td>{persona.apellido}</td>
-                            <td className="acciones">
-                                <BotonVer entidad={'persona'} id={persona.id} />
-                                <BotonEditar entidad={'persona'} id={persona.id} />
-                                <BotonEliminar entidad={'persona'} id={persona.id} />
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-            <br />
-            <BotonVolver entidad={''} />
-        </div>
+        <ListadoGenerico
+            titulo="Personas"
+            elementos={personas}
+            valor1="dni"
+            valor2="nombre"
+            valor3="apellido"
+            columna1="DNI"
+            columna2="Nombre"
+            columna3="Apellido"
+            acciones={Acciones}
+            botonNuevo={<BotonNuevaPersona entidad="persona" />}
+            botonVolver={<BotonVolver entidad="" />}
+        />
     );
 };
