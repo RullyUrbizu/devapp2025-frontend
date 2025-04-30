@@ -33,7 +33,7 @@ export const PersonasListadas = () => {
     );
 
     return (
-        <ListadoGenerico
+        <ListadoGenerico<Persona>
             titulo="Personas"
             elementos={personas}
             valor1="dni"

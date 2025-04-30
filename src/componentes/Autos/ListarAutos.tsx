@@ -37,15 +37,15 @@ export const ListarAutos = ({ unDuenio }: Duenio) => {
     );
 
     return (
-        <ListadoGenerico
+        <ListadoGenerico<Auto>
             titulo="Autos"
             elementos={autos}
-            campo1="patente"
-            campo2="marca"
-            campo3="modelo"
-            encabezado1="Patente"
-            encabezado2="Marca"
-            encabezado3="Modelo"
+            valor1="patente"
+            valor2="marca"
+            valor3="modelo"
+            columna1="Patente"
+            columna2="Marca"
+            columna3="Modelo"
             acciones={Acciones}
             botonVolver={<BotonVolver entidad="" />}
         />
