@@ -19,7 +19,7 @@ export const VerAuto = () => {
     useEffect(() => {
         const fetchAuto = async () => {
             try {
-                const res = await apiClient.get<Auto>(`/auto/${id}`);
+                const res = await apiClient.get<Auto>(`/autos/${id}`);
                 setAuto(res.data);
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
             } catch (err) {
@@ -34,7 +34,7 @@ export const VerAuto = () => {
         if (!auto?.duenio) return;
         const fetchPersona = async () => {
             try {
-                const laPersona = await apiClient.get<Persona>(`/persona/${auto.duenio}`);
+                const laPersona = await apiClient.get<Persona>(`/personas/${auto.duenio}`);
                 setPersona(laPersona.data);
             } catch (err) {
                 setError('Error al obtener el auto' + err);

@@ -18,7 +18,7 @@ export const VerPersona = () => {
     useEffect(() => {
         const fetchPersona = async () => {
             try {
-                const res = await apiClient.get<Persona>(`/persona/${id}`);
+                const res = await apiClient.get<Persona>(`/personas/${id}`);
                 setPersona(res.data);
             } catch {
                 setError('Error al obtener la persona');

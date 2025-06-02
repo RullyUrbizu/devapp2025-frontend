@@ -23,7 +23,7 @@ export const EditarAuto = () => {
     useEffect(() => {
         const fetchAuto = async () => {
             try {
-                const res = await apiClient.get(`/auto/${id}`);
+                const res = await apiClient.get(`/autos/${id}`);
                 const auto: Auto = res.data as Auto;
 
                 setForm({
@@ -55,7 +55,7 @@ export const EditarAuto = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            await apiClient.put(`/auto/${id}`, form);
+            await apiClient.put(`/autos/${id}`, form);
             navigate('/autos');
         } catch (error) {
             console.error('Error al actualizar auto:', error);

@@ -9,7 +9,7 @@ export const EliminarPersona = () => {
     const [errMsg, setErrMsg] = useState<string>('');
     const navigate = useNavigate();
 
-    const ELIMINAR_PERSONA = `/persona/${id}`;
+    const ELIMINAR_PERSONA = `/personas/${id}`;
 
     const handleDelete = async () => {
         try {

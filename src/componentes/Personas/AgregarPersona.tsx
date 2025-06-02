@@ -37,7 +37,7 @@ export const CrearPersona = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            await apiClient.post('/persona', {
+            await apiClient.post('/personas', {
                 ...form,
                 fechaNacimiento: new Date(form.fechaNacimiento).toISOString(),
                 autos: []
@@ -80,7 +80,7 @@ export const CrearPersona = () => {
                     <option value="">Seleccione genero</option>
                     <option value={Genero.Masculino}>Masculino</option>
                     <option value={Genero.Femenino}>Femenino</option>
-                    <option value={Genero.NoBinario}>Otro</option>
+                    <option value={Genero.NoBinario}>No Binario</option>
                 </select>
                 <label>
                     <input type="checkbox" name="esDonante" checked={form.esDonante} onChange={handleChange} /> Donante

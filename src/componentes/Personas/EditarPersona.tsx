@@ -24,7 +24,7 @@ export const EditarPersona = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await apiClient.get(`/persona/${id}`);
+                const res = await apiClient.get(`/personas/${id}`);
                 const persona = res.data as Persona;
                 setForm({
                     nombre: persona.nombre,
@@ -60,7 +60,7 @@ export const EditarPersona = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            await apiClient.put(`/persona/${id}`, {
+            await apiClient.put(`/personas/${id}`, {
                 ...form,
                 fechaNacimiento: new Date(form.fechaNacimiento).toISOString()
             });
